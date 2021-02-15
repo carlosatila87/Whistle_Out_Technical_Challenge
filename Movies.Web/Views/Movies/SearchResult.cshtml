@@ -1,0 +1,76 @@
+﻿@using Movies.Web.Models.Movies
+@model ResultCollection
+@{
+    ViewData["Title"] = "Movies List";
+    var previousPage = Convert.ToInt32(ViewData["PreviousPage"]);
+    var nextPage = Convert.ToInt32(ViewData["NextPage"]);
+    var position = 0;
+}
+
+@section MarkUp{
+    <script type="application/ld+json">
+    {
+      "@@context":"https://schema.org",
+      "@@type":"ItemList",
+      "itemListElement":[
+        @foreach(var movie in Model.Search)
+        {
+            position++;
+            <text>
+                {
+                    "@@type":"ListItem",
+                     "position":@position,
+                     "url":"@Url.Action("Details", "Movies", new { i = movie.ImdbId}, Context.Request.Scheme)"
+                }
+            </text>
+            @if(position < 10)
+            {
+                <text>,</text>
+            }
+        }
+      ]
+    }
+    </script>
+}
+<section class="movies" id="movies">
+    <div class="row">
+        <button type="button" class="btn btn-primary" onclick="history.back()">Return</button>
+    </div>
+    <hr />
+    <div class="row justify-content-center">
+        @foreach (var movie in Model.Search)
+        {
+            <partial name="_MovieResult" model="movie" />
+        }
+    </div>
+    <div class="row justify-content-center">
+        <nav aria-label="...">
+            <ul class="pagination justify-content-center">
+                @if (previousPage > 0)
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="Movies" asp-action="SearchResult" asp-route-s="@Context.Request.Query["s"]" asp-route-type="@Context.Request.Query["type"]" asp-route-y="@Context.Request.Query["y"]" asp-route-page="@previousPage">Previous</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item disabled">
+                        <a class="page-link" asp-controller="Movies" asp-action="SearchResult" asp-route-s="@Context.Request.Query["s"]" asp-route-type="@Context.Request.Query["type"]" asp-route-y="@Context.Request.Query["y"]" asp-route-page="@previousPage">Previous</a>
+                    </li>
+                }
+                @if (nextPage > 0)
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="Movies" asp-action="SearchResult" asp-route-s="@Context.Request.Query["s"]" asp-route-type="@Context.Request.Query["type"]" asp-route-y="@Context.Request.Query["y"]" asp-route-page="@nextPage">Next</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item disabled">
+                        <a class="page-link" asp-controller="Movies" asp-action="SearchResult" asp-route-s="@Context.Request.Query["s"]" asp-route-type="@Context.Request.Query["type"]" asp-route-y="@Context.Request.Query["y"]" asp-route-page="@nextPage">Next</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </div>
+</section>

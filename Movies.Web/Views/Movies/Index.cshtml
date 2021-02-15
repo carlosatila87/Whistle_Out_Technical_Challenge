@@ -1,0 +1,35 @@
+﻿<section class="search" id="search">
+    <form action="@Url.Action("SearchResult", "Movies")" method="get">
+        <h2 class="row justify-content-center">Search movies</h2>
+        <hr />
+        <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-14" style="padding-left: 0px; padding-right: 0px;">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="fa fa-search fa-2x"></i>
+                    </span>
+                    <input type="search" placeholder="Title" class="form-control" id="s" name="s" required />
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-14" style="padding-left: 0px; padding-right: 0px;">
+                <select class="form-control" id="type" name="type">
+                    <option value="@string.Empty" disabled selected>Type</option>
+                    <option value="movie">Movie</option>
+                    <option value="series">Series</option>
+                    <option value="episode">Episode</option>
+                </select>
+            </div>
+            <div class="col-lg-4 col-md-14" style="padding-left: 0px; padding-right: 0px;">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="fa fa-search fa-2x"></i>
+                    </span>
+                    <input type="search" placeholder="Year" class="form-control" id="y" name="y" />
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-14 text-lg-right" style="padding-left: 0px; padding-right: 0px;">
+                <input type="submit" class="btn btn-primary" value="Search" />
+            </div>
+        </div>
+    </form>
+</section>

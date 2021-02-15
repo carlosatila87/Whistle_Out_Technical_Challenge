@@ -1,0 +1,233 @@
+﻿@model Movies.Web.Models.Movies.Details
+@using Microsoft.AspNetCore.Http.Extensions
+@{ 
+    var genreList = Model.Genre.Split(",");
+    var genreCount = 0;
+}
+@section MarkUp{
+    <script type="application/ld+json">
+    {
+      "@@context": "https://schema.org",
+      "@@type": "Movie",
+      "url":"@Context.Request.GetDisplayUrl()",
+      "name": "@Model.Title",
+      "image": "@Model.Poster",
+      "genre": [
+         @foreach(var genre in genreList)
+         {
+             genreCount++;
+             <text>"@genre"</text>
+             if (genreCount < genreList.Count())
+             {
+                 <text>,</text>
+             }
+         }
+        ],
+        "contentRating": "@Model.Rated",
+        "description": "@Model.Plot"      
+    }
+    </script>
+}
+
+<section class="details" id="details">
+    <h2 class="row justify-content-center">Movie Details</h2>
+    <div class="row justify-content-center">
+        <strong>@Model.Title</strong>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <div class="row">
+                <div class="img-card">
+                    <img src="@Model.Poster" alt="Movie" class="w-100">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <hr />
+            <div class="row">
+                <div class="col-sm-3">
+                    Plot
+                </div>
+                <div class="col-sm-9">
+                    @Model.Plot
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    Year
+                </div>
+                <div class="col-sm-9">
+                    @Model.Year
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    Ratings
+                </div>
+                <div class="col-sm-9">
+                    @foreach (var rating in Model.Ratings)
+                    {
+                        <text>@rating.Source: @rating.Value. </text>
+                    }
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    Actors
+                </div>
+                <div class="col-sm-9">
+                    @Model.Actors
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    Awards
+                </div>
+                <div class="col-sm-9">
+                    @Model.Awards
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    Box Office
+                </div>
+                <div class="col-sm-9">
+                    @Model.BoxOffice
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    Country
+                </div>
+                <div class="col-sm-9">
+                    @Model.Country
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    Director
+                </div>
+                <div class="col-sm-9">
+                    @Model.Director
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    Dvd
+                </div>
+                <div class="col-sm-9">
+                    @Model.Dvd
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    Genre
+                </div>
+                <div class="col-sm-9">
+                    @Model.Genre
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    IMDB Rating
+                </div>
+                <div class="col-sm-9">
+                    @Model.ImdbRating
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    IMDB Votes
+                </div>
+                <div class="col-sm-9">
+                    @Model.ImdbVotes
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    Language
+                </div>
+                <div class="col-sm-9">
+                    @Model.Language
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    Metascore
+                </div>
+                <div class="col-sm-9">
+                    @Model.Metascore
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    Production
+                </div>
+                <div class="col-sm-9">
+                    @Model.Production
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    Rated
+                </div>
+                <div class="col-sm-9">
+                    @Model.Rated
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    Ratings
+                </div>
+                <div class="col-sm-9">
+                    @Model.Ratings
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    Release Date
+                </div>
+                <div class="col-sm-9">
+                    @Model.Released
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    Duration
+                </div>
+                <div class="col-sm-9">
+                    @Model.Runtime
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    Type
+                </div>
+                <div class="col-sm-9">
+                    @Model.Type
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    Website
+                </div>
+                <div class="col-sm-9">
+                    @Model.Website
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    Writer
+                </div>
+                <div class="col-sm-9">
+                    @Model.Writer
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <button type="button" class="btn btn-primary" onclick="history.back()">Return</button>
+    </div>
+</section>
